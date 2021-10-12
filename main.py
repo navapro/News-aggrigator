@@ -23,13 +23,13 @@ class aggregator:
 
         print(self.headlines)
 
-        for i in range(len(self.headlines),2):
+        new_headline = []
+        for i in range(0,len(self.headlines)-2, 3):
+            new_headline.append(self.headlines[i])
 
+        self.headlines = new_headline
 
-
-
-
-
+    
 
 new = aggregator(keyword,news_site)
 new.filter()
