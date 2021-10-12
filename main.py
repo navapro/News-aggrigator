@@ -12,6 +12,7 @@ class aggregator:
         self.website = requests.get(url).text
         self.headlines = []
         self.links = []
+        self.set = {}
 
     def filter(self):
         soup = BeautifulSoup(self.website, 'html.parser')
@@ -21,7 +22,6 @@ class aggregator:
             self.headlines.append(current)
             self.links.append(link.get('href'))
 
-        print(self.headlines)
 
         new_headline = []
         for i in range(0,len(self.headlines)-2, 3):
@@ -29,9 +29,16 @@ class aggregator:
 
         self.headlines = new_headline
 
-    
+        for j in range(len(self.headlines)):
+            self.set[self.headlines[j]] = self.links[j]
+
+
+
+
+
+
+
 
 new = aggregator(keyword,news_site)
 new.filter()
-print(new.links)
-print(new.headlines)
+print(new.set)
