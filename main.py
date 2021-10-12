@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import smtplib, ssl
 
 news_site = "https://techcrunch.com/"
 keyword = "tesla"
@@ -33,12 +34,19 @@ class aggregator:
             self.set[self.headlines[j]] = self.links[j]
 
 
-
-
-
-
-
-
 new = aggregator(keyword,news_site)
 new.filter()
 print(new.set)
+
+
+
+
+port = 465  # For SSL
+password = input("****")
+
+# Create a secure SSL context
+context = ssl.create_default_context()
+
+with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+    server.login("morning.newsletter.tech@gmail.com", password)
+
